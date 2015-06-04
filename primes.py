@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 
-def printFirstTenPrimes():
+def print_first_ten_primes():
     n = 0
-    for i in getPrimes():
+    for i in get_primes():
         print(i, end=' ')
         n += 1
         if n == 10:
             print()
             break
 
-def getPrimes():
+def get_primes():
     for i in range(1, 10000):
-        if isPrime(i):
+        if is_prime(i):
             yield i
 
-def isPrime(n):
+def is_prime(n):
     if n < 2:
         return
     for i in range(2, n - 1):
@@ -22,4 +22,5 @@ def isPrime(n):
             return False
     return True
 
-if __name__ == 'main': printFirstTenPrimes()
+
+if __name__ == '__main__': print_first_ten_primes()
