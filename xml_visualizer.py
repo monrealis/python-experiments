@@ -1,5 +1,4 @@
 import unittest
-
 import xml.etree.ElementTree as ET
 
 import lxml.etree as et
@@ -18,6 +17,9 @@ class XmlVisualizerTest(unittest.TestCase):
     def test_visualizes_root_element_with_prefix(self):
         self.assertEqual('root', self.visualize('<r:root xmlns:r="urn:test:test" />'))
 
+    def test_visualizes_with_attribute(self):
+        self.assertEqual('root @a', self.visualize('<root a="" />'))
+
     def visualize(self, xml):
         return XmlVisualizer(xml).visualize()
 
@@ -28,8 +30,8 @@ class XmlVisualizer:
 
     def visualize(self):
         q = et.QName(self.tree.tag)
-        return str(q.localname)
+        r = str(q.localname)
+        for a in self.tree.attrib:
+            r += " @" + a
+        return r
 
-    def dump(self, obj):
-        for attr in dir(obj):
-            print("obj.%s = %s" % (attr, getattr(obj, attr)))
